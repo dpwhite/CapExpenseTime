@@ -37,10 +37,12 @@ namespace CapExpenseTime.Data.Seeding
                 foreach (var project in projects)
                 {
                     var monthNumber = Randomizer.Seed.Next(1, 12);
-                    var projectEmployee = new ProjectEmployees();
-                    projectEmployee.ProjectId = project.Id;
-                    projectEmployee.EmployeeId = employee.Id;
-                    projectEmployee.DateAdded = project.StartDate.AddMonths(monthNumber);
+                    var projectEmployee = new ProjectEmployees
+                    {
+                        ProjectId = project.Id,
+                        EmployeeId = employee.Id,
+                        DateAdded = project.StartDate.AddMonths(monthNumber)
+                    };
                     context.ProjectEmployees.Add(projectEmployee);
                 }
             }

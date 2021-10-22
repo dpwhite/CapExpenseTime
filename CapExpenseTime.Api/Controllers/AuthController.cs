@@ -61,9 +61,11 @@ namespace CapExpenseTime.API.Controllers
         private async Task<int> AddNewEmployee(string employeeName)
         {
             var name = employeeName.Split(' ');
-            Employee employee = new Employee();
-            employee.FirstName = name[0];
-            employee.LastName = name[1];
+            Employee employee = new()
+            {
+                FirstName = name[0],
+                LastName = name[1]
+            };
             this.context.Employees.Add(employee);
             var retval = await this.context.SaveChangesAsync();
             return retval;
@@ -79,7 +81,7 @@ namespace CapExpenseTime.API.Controllers
                 return NotFound();
             }
             var employee = await GetEmployeeInfo(employeeId);
-            var retval = JsonConvert.SerializeObject(employee);
+            _ = JsonConvert.SerializeObject(employee);
             return Ok(employee);
         }
 

@@ -41,8 +41,7 @@ namespace CapExpenseTime.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetProject(string id)
         {
-            Guid projectId;
-            if (!Guid.TryParse(id, out projectId))
+            if (!Guid.TryParse(id, out Guid projectId))
             {
                 return NotFound();
             }
@@ -59,8 +58,7 @@ namespace CapExpenseTime.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetProjectsForEmployee(string id)
         {
-            Guid employeeId; 
-            if (!Guid.TryParse(id, out employeeId))
+            if (!Guid.TryParse(id, out Guid employeeId))
             {
                 return NotFound();
             }

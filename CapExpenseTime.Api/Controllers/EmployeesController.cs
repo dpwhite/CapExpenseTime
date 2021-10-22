@@ -38,7 +38,7 @@ namespace CapExpenseTime.API.Controllers
         public void Post([FromBody] Employee value)
         {
             this._context.Employees.Add(value);
-            var retval = this._context.SaveChanges();
+            this._context.SaveChanges();
         }
 
         // PUT api/<EmployeesController>/5
