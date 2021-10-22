@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapExpenseTime.Web", "CapExpenseTime.Web\CapExpenseTime.Web.csproj", "{AFA66709-E07A-4989-BD44-331B4BF1FD77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapExpenseTime.Web", "CapExpenseTime.Web\CapExpenseTime.Web.csproj", "{AFA66709-E07A-4989-BD44-331B4BF1FD77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapExpenseTime.API", "CapExpenseTime.Api\CapExpenseTime.API.csproj", "{DA0CD671-9E41-415A-9261-E6575B8FC997}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapExpenseTime.Data", "CapExpenseTime.Data\CapExpenseTime.Data.csproj", "{3238BA2B-DB8E-4ABB-BA39-DFE05A1052BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{AFA66709-E07A-4989-BD44-331B4BF1FD77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFA66709-E07A-4989-BD44-331B4BF1FD77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFA66709-E07A-4989-BD44-331B4BF1FD77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0CD671-9E41-415A-9261-E6575B8FC997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0CD671-9E41-415A-9261-E6575B8FC997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0CD671-9E41-415A-9261-E6575B8FC997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0CD671-9E41-415A-9261-E6575B8FC997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3238BA2B-DB8E-4ABB-BA39-DFE05A1052BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3238BA2B-DB8E-4ABB-BA39-DFE05A1052BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3238BA2B-DB8E-4ABB-BA39-DFE05A1052BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3238BA2B-DB8E-4ABB-BA39-DFE05A1052BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
