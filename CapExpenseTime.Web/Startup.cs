@@ -1,9 +1,15 @@
+using CapExpenseTime.API.Controllers;
+using CapExpenseTime.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
+using System.Reflection;
 
 namespace CapExpenseTime.Web
 {
@@ -21,11 +27,27 @@ namespace CapExpenseTime.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            var projectAssembly = typeof(ProjectsController).GetTypeInfo().Assembly;
+            var userAssembly = typeof(AuthController).GetTypeInfo().Assembly;
+            services.AddControllersWithViews(config => { })
+                 .ConfigureApiBehaviorOptions(options =>
+                 {
+                     options.InvalidModelStateResponseFactory = actionContext =>
+                     {
+                         return new BadRequestObjectResult(actionContext.ModelState.Values.SelectMany(v => v.Errors).Select(m => m.ErrorMessage).ToList());
+                     };
+                 })
+                 .AddApplicationPart(userAssembly)
+                 .AddApplicationPart(projectAssembly);
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddDbContext<CapExpenseTimeContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
         }
 
