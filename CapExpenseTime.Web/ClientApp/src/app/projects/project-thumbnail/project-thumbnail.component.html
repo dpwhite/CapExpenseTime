@@ -1,0 +1,6 @@
+<div [routerLink]="['/projects/', project.id]" class="well hoverwell thumbnail">
+    <h2>{{project?.name}}</h2>
+    <div>Project Start Date: {{project?.startDate | date: 'shortDate'}}</div>
+    <div>Total Hours To Date: {{ project?.totalHours }}</div>
+    <div>Description: {{project?.description}}</div>
+</div>

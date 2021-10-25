@@ -9,9 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ProjectListComponent } from './projects/project-list/project-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ProjectDetailComponent, ProjectListComponent, ProjectListResolver, ProjectThumbnailComponent, ProjectService } from './projects/index';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ProjectDetailComponent,
+    ProjectThumbnailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ]),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ProjectService, ProjectListResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
