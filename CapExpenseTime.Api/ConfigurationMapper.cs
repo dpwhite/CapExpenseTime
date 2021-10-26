@@ -12,10 +12,11 @@ namespace CapExpenseTime.API
         public static MapperConfiguration config;
         public static void ConfigureMapper()
         {
-            config = new MapperConfiguration(cfg =>
+            config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Project, ProjectViewModel>()
-                .ForMember(dest => dest.ProjectType, act => act.MapFrom(src => src.ProjectType != ProjectType.Capital ? ProjectType.Capital : ProjectType.Expense))
-            );
+                .ForMember(dest => dest.ProjectType, act => act.MapFrom(src => src.ProjectType != ProjectType.Capital ? ProjectType.Capital : ProjectType.Expense));
+                cfg.CreateMap<Employee, EmployeeViewModel>();
+            });
         }
     }
 }

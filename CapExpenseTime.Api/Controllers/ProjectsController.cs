@@ -1,13 +1,10 @@
-﻿using AgileObjects.AgileMapper;
-using CapExpenseTime.Data;
+﻿using CapExpenseTime.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 
 namespace CapExpenseTime.API.Controllers
 {
@@ -28,12 +25,27 @@ namespace CapExpenseTime.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetProjects()
         {
-            var projects = await context.Projects                
+            var projects = await context.Projects
                 .AsNoTracking()
                 .ToListAsync();
 
-            var projectView = mapper.Map<ProjectViewModel[]>(projects);
-            return Ok(projectView);
+            var projectEmployees = context.ProjectEmployees
+                .AsNoTracking();
+
+            var employees = await context.Employees
+                .AsNoTracking()
+                .ToListAsync();
+
+            var projectViewList = mapper.Map<ProjectViewModel[]>(projects);
+            var employeeViewList = mapper.Map<EmployeeViewModel[]>(employees);
+
+            foreach (var project in projectViewList)
+            {
+                var employeeIds = projectEmployees.Where(e => e.ProjectId == project.Id).Select(e => e.EmployeeId).ToList();
+                var employeeList = employeeViewList.Where(e => employeeIds.Contains(e.Id)).ToList();
+                project.Employees = employeeList;
+            }
+            return Ok(projectViewList);
         }
 
         [HttpGet("{id}")]
