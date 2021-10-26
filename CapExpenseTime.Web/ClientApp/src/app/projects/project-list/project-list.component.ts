@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, ProjectService } from '../index';
+import { Project, ProjectService, ProjectMonth } from '../index';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -9,9 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./project-list.component.css']
 })
 
-export class ProjectsListComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
   employeeId: string = '';
-  projectDataSource: Project[] = [];
+  projects: Project[] = [];
   tableData: any;
   showProjectInfo: boolean = false;
   project: Project = new Project();
@@ -28,7 +28,22 @@ export class ProjectsListComponent implements OnInit {
     'total'
   ];
   //objectKeys = Object.keys;
+  selectedProjectMonth: number;
 
+  projectMonths: ProjectMonth[] = [
+    { id: 0, month: 'January', selected: false },
+    { id: 1, month: 'Febrary', selected: false },
+    { id: 2, month: 'March', selected: false },
+    { id: 3, month: 'April', selected: false },
+    { id: 4, month: 'May', selected: false },
+    { id: 5, month: 'June', selected: false },
+    { id: 6, month: 'July', selected: false },
+    { id: 7, month: 'August', selected: false },
+    { id: 8, month: 'September', selected: false },
+    { id: 9, month: 'October', selected: false },
+    { id: 10, month: 'November', selected: false },
+    { id: 11, month: 'December', selected: false }
+  ]
   displayedColumns: string[] = ['name', 'project type', 'start date', 'description'];
 
   constructor(private router: Router, private route: ActivatedRoute, private service: ProjectService) {
@@ -36,10 +51,13 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeId = this.route.snapshot.paramMap.get("id") || '';
+    let currentMonth = new Date().getMonth();
+    this.projectMonths[currentMonth].selected = true;
+
     if (this.employeeId.length > 0) {
       this.service.getProjectsForEmployee(this.employeeId).subscribe(
         (res: Project[]) => {
-          this.projectDataSource = res;
+          this.projects = res;
         },
         (err: any) => {
           console.log('Errors: ', err);
@@ -50,7 +68,7 @@ export class ProjectsListComponent implements OnInit {
       //retrieve all projects for all employees
       this.service.getProjects().subscribe(
         (res: Project[]) => {
-          this.projectDataSource = res;
+          this.projects = res;
         },
         (err: any) => {
           console.log('Errors: ', err);
@@ -82,7 +100,7 @@ export class ProjectsListComponent implements OnInit {
   saveChanges(): void {
     this.service.getProjectsForEmployee(this.employeeId).subscribe(
       (res: Project[]) => {
-        this.projectDataSource = res;
+        this.projects = res;
         this.showProjectInfo = false;
       },
       (err: any) => {

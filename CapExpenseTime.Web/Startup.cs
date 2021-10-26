@@ -1,5 +1,7 @@
+using CapExpenseTime.API;
 using CapExpenseTime.API.Controllers;
 using CapExpenseTime.Data;
+using CapExpenseTime.Web.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +64,7 @@ namespace CapExpenseTime.Web
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
@@ -70,7 +72,8 @@ namespace CapExpenseTime.Web
             }
 
             app.UseRouting();
-
+            app.UseAuthorization();
+            //app.UseMiddleware<ValidationExceptionHandler>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -89,6 +92,7 @@ namespace CapExpenseTime.Web
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+                spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
             });
         }
     }

@@ -10,7 +10,6 @@ namespace CapExpenseTime.API
     public static class ConfigurationMapper
     {
         public static MapperConfiguration config;
-
         public static void ConfigureMapper()
         {
             config = new MapperConfiguration(cfg =>

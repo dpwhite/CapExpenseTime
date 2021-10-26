@@ -17,10 +17,11 @@ namespace CapExpenseTime.API.Controllers
     public class ProjectsController : ControllerBase
     {
         readonly CapExpenseTimeContext context;
-
+        readonly AutoMapper.Mapper mapper;
         public ProjectsController(CapExpenseTimeContext context)
         {
             this.context = context;
+            this.mapper = new AutoMapper.Mapper(ConfigurationMapper.config);
         }
 
         [HttpGet]
@@ -31,9 +32,7 @@ namespace CapExpenseTime.API.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            var mapper = new AutoMapper.Mapper(ConfigurationMapper.config);
             var projectView = mapper.Map<ProjectViewModel[]>(projects);
-
             return Ok(projectView);
         }
 

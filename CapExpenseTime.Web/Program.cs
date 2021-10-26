@@ -1,3 +1,4 @@
+using CapExpenseTime.API;
 using CapExpenseTime.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace CapExpenseTime.Web
                 await context.Database.MigrateAsync();
                 await DbInitializer.InitializeAsync(context);
             }
+            ConfigurationMapper.ConfigureMapper();
             await host.RunAsync();
             //CreateHostBuilder(args).Build().Run();
         }

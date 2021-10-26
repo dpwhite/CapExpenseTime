@@ -1,11 +1,12 @@
 <div>
-    <h1>Cap/Expense Projects</h1>
-    <div>Month End: <select><option *ngFor="let month of projectMonths" [selected]="month.selected">{{month.month}}</option></select>
+  <h1>Cap/Expense Projects</h1>
+  <div>
+    Month End: <select><option *ngFor="let month of projectMonths" [selected]="month.selected">{{month.month}}</option></select>
+  </div>
+  <hr>
+  <div class="row">
+    <div *ngFor="let project of projects" class="col-md-5">
+      <project-thumbnail [project]="project" (projectClicked)="handleProjectClicked($event)"></project-thumbnail>
     </div>
-    <hr>
-    <div class="row">
-        <div *ngFor="let project of projects" class="col-md-5">
-        <project-thumbnail [project]="project" (projectClicked)="handleProjectClicked($event)"></project-thumbnail>
-        </div>
-    </div>    
+  </div>
 </div>
