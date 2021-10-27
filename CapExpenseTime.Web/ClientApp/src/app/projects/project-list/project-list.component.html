@@ -1,8 +1,10 @@
 <div>
-  <h1>Cap/Expense Projects</h1>
-  <div>
-    Month End: <select><option *ngFor="let month of projectMonths" [selected]="month.selected">{{month.month}}</option></select>
-  </div>
+  <mat-card-title>
+    Cap/Expense Projects
+    <div>
+      Month End: <select><option *ngFor="let month of projectMonths" [selected]="month.selected">{{month.month}}</option></select>
+    </div>
+  </mat-card-title>
   <hr>
   <div class="row">
     <div *ngFor="let project of projects" class="col-md-5">

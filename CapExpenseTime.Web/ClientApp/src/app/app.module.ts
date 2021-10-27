@@ -11,11 +11,10 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectDetailComponent, ProjectListComponent, ProjectListResolver, ProjectThumbnailComponent, ProjectService } from './projects/index';
 import { appRoutes } from './routes';
-import { MatButtonModule } from '@angular/material/button';
+import { AppMaterialModule } from './appmaterial.module';
 
 @NgModule({
   exports: [
-    MatButtonModule
   ],
   declarations: [
     AppComponent,
@@ -38,7 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
     //  { path: 'fetch-data', component: FetchDataComponent },
     //]),
     BrowserAnimationsModule,
-    MatButtonModule
+    AppMaterialModule
   ],
   providers: [ProjectService, ProjectListResolver],
   bootstrap: [AppComponent]
