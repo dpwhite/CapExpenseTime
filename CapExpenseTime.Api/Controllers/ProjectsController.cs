@@ -44,7 +44,9 @@ namespace CapExpenseTime.API.Controllers
                 var employeeIds = projectEmployees.Where(e => e.ProjectId == project.Id).Select(e => e.EmployeeId).ToList();
                 var employeeList = employeeViewList.Where(e => employeeIds.Contains(e.Id)).ToList();
                 project.Employees = employeeList;
+                project.EmployeeCount = employeeList.Count();
             }
+
             return Ok(projectViewList);
         }
 

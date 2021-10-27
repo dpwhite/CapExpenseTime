@@ -15,5 +15,6 @@ namespace CapExpenseTime.API
         public DateTime EndDate { get; set; }
         public string Description { get; set; }
         public List<EmployeeViewModel> Employees { get; set; }
+        public int EmployeeCount { get; set; }
     }
 }

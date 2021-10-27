@@ -7,6 +7,7 @@ export class Project {
     description: string = '';
     totalHours: number = 0;
     employees: Employee[] = [];
+    employeeCount: number = 0;
     
   }
    
