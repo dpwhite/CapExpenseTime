@@ -11,8 +11,12 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectDetailComponent, ProjectListComponent, ProjectListResolver, ProjectThumbnailComponent, ProjectService } from './projects/index';
 import { appRoutes } from './routes';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
+  exports: [
+    MatButtonModule
+  ],
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -33,7 +37,8 @@ import { appRoutes } from './routes';
     //  { path: 'counter', component: CounterComponent },
     //  { path: 'fetch-data', component: FetchDataComponent },
     //]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [ProjectService, ProjectListResolver],
   bootstrap: [AppComponent]

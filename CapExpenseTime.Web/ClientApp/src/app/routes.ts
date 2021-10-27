@@ -9,7 +9,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 export const appRoutes: Routes = [
   //{ path: '', redirectTo: '/projects', pathMatch: 'full' },
   //{ path: 'projects', component: ProjectListComponent, resolve: {projects: ProjectListResolver}},
-  //{ path: 'projects/:id', component: ProjectDetailComponent },
+  { path: 'projects/:id', component: ProjectDetailComponent },
   { path: '', component: ProjectListComponent, pathMatch: 'full' },
   { path: 'counter', component: CounterComponent },
   { path: 'fetch-data', component: FetchDataComponent },

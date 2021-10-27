@@ -12,14 +12,24 @@ import { ProjectService } from '../project.service';
 
 export class ProjectDetailComponent implements OnInit {
   project: Project;
+  projectId: string;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.forEach(
-      (params: Params) => {
-              
+    this.projectId = this.route.snapshot.paramMap.get("id") || '';
+    this.projectService.getProject(this.projectId).subscribe(
+      (res: Project) => {
+        this.project = res;
+      },
+      (err: any) => {
+        console.log('Errors: ', err);
       }
-    )
+    );
+    //this.route.params.forEach(
+    //  (params: Params) => {
+              
+    //  }
+    //)
   } 
 }
