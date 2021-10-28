@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectDetailComponent, ProjectListComponent, ProjectListResolver, ProjectThumbnailComponent, ProjectService } from './projects/index';
 import { appRoutes } from './routes';
 import { AppMaterialModule } from './appmaterial.module';
+import { EmployeesListComponent } from './employees/employees-list/employees-list.component';
 
 @NgModule({
   exports: [
@@ -24,7 +25,8 @@ import { AppMaterialModule } from './appmaterial.module';
     FetchDataComponent,
     ProjectListComponent,
     ProjectDetailComponent,
-    ProjectThumbnailComponent
+    ProjectThumbnailComponent,
+    EmployeesListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
