@@ -19,6 +19,6 @@ namespace CapExpenseTime.Data
         public double Testing { get; set; }
         public double Training { get; set; }
         public string Comments { get; set; }
-
+        public int YearMonth { get; set; }
     }
 }

@@ -98,17 +98,36 @@ namespace CapExpenseTime.API.Controllers
         }
 
 
-        //[AllowAnonymous]
-        //[HttpGet("test")]
-        //public async Task<IActionResult> Test()
-        //{
-        //    var message = await GetInfo();
-        //    return Ok(message);
-        //}
+        [HttpGet("usedLastMonth")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProjectsUsedLastMonth()
+        {
 
-        //private Task<string> GetInfo()
-        //{
-        //    return Task.Run(() => "login works");
-        //}
+            var yearMonth = Convert.ToInt32($"{DateTime.Now.Year}{DateTime.Now.Month - 1}");
+
+            var projects = await context.Projects
+                .AsNoTracking()
+                .ToListAsync();
+
+            var projectEmployees = context.ProjectEmployees
+                .AsNoTracking();
+
+            var employees = await context.Employees
+                .AsNoTracking()
+                .ToListAsync();
+
+            var projectViewList = mapper.Map<ProjectViewModel[]>(projects);
+            var employeeViewList = mapper.Map<EmployeeViewModel[]>(employees);
+
+            foreach (var project in projectViewList)
+            {
+                var employeeIds = projectEmployees.Where(e => e.ProjectId == project.Id && e.YearMonth == yearMonth).Select(e => e.EmployeeId).ToList();
+                var employeeList = employeeViewList.Where(e => employeeIds.Contains(e.Id)).ToList();
+                project.Employees = employeeList;
+                project.EmployeeCount = employeeList.Count();
+            }
+
+            return Ok(projectViewList);
+        }
     }
 }

@@ -30,6 +30,10 @@ export class ProjectListComponent implements OnInit {
   //objectKeys = Object.keys;
   selectedProjectMonth: number;
 
+  earliestProjectYear: number = 2018;
+  currentYear: number;
+  projectYears: number[] = [];
+
   projectMonths: ProjectMonth[] = [
     { id: 0, month: 'January', selected: false },
     { id: 1, month: 'Febrary', selected: false },
@@ -50,6 +54,14 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    const currentDate = new Date();
+    this.currentYear = currentDate.getFullYear();
+    for (let i = this.earliestProjectYear; i <= this.currentYear; i++) {
+      for (let x = 0; x < 12; x++) {
+        this.projectMonths
+      }
+    }
     this.employeeId = this.route.snapshot.paramMap.get("id") || '';
     let currentMonth = new Date().getMonth();
     this.projectMonths[currentMonth].selected = true;
@@ -65,8 +77,8 @@ export class ProjectListComponent implements OnInit {
       );
     }
     else {
-      //retrieve all projects for all employees
-      this.service.getProjects().subscribe(
+      //retrieve all projects for all employees with an entry from last month
+      this.service.getProjectsUsedLastMonth().subscribe(
         (res: Project[]) => {
           this.projects = res;
         },

@@ -26,4 +26,8 @@ export class ProjectService {
   updateProject(project: Project) {    
     return this.http.put<Project>(`api/projects/project/${project.id}`, project);
   }
+
+  getProjectsUsedLastMonth(): Observable<Project[]> {
+    return this.http.get<Project[]>('api/projects/usedLastMonth');
+  }
 }

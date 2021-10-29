@@ -3,6 +3,7 @@
     Cap/Expense Projects
     <div>
       Month End: <select><option *ngFor="let month of projectMonths" [selected]="month.selected">{{month.month}}</option></select>
+      Year: <select><option *ngFor="let year of projectYears" [selected]="currentYear">{{year}}</option></select>
     </div>
   </mat-card-title>
   <hr>
