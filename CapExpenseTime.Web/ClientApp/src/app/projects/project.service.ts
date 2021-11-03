@@ -30,4 +30,8 @@ export class ProjectService {
   getProjectsUsedLastMonth(): Observable<Project[]> {
     return this.http.get<Project[]>('api/projects/usedLastMonth');
   }
+
+  getProjectsForMonthYear(monthYear: string): Observable<Project[]> {
+    return this.http.get<Project[]>(`api/projects/projectsForMonth/${monthYear}`);
+  }
 }

@@ -29,25 +29,11 @@ export class ProjectListComponent implements OnInit {
   ];
   //objectKeys = Object.keys;
   selectedProjectMonth: number;
-
+  projectMonthYear: string;
   earliestProjectYear: number = 2018;
-  currentYear: number;
-  projectYears: number[] = [];
-
-  projectMonths: ProjectMonth[] = [
-    { id: 0, month: 'January', selected: false },
-    { id: 1, month: 'Febrary', selected: false },
-    { id: 2, month: 'March', selected: false },
-    { id: 3, month: 'April', selected: false },
-    { id: 4, month: 'May', selected: false },
-    { id: 5, month: 'June', selected: false },
-    { id: 6, month: 'July', selected: false },
-    { id: 7, month: 'August', selected: false },
-    { id: 8, month: 'September', selected: false },
-    { id: 9, month: 'October', selected: false },
-    { id: 10, month: 'November', selected: false },
-    { id: 11, month: 'December', selected: false }
-  ]
+  projectMonthYears: string[] = [];
+  months: string[] = ['January','Febrary','March','April','May','June','July','August','September','October','November','December'];
+  projectMonths: ProjectMonth[] = []
   displayedColumns: string[] = ['name', 'project type', 'start date', 'description'];
 
   constructor(private router: Router, private route: ActivatedRoute, private service: ProjectService) {
@@ -56,15 +42,25 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
 
     const currentDate = new Date();
-    this.currentYear = currentDate.getFullYear();
-    for (let i = this.earliestProjectYear; i <= this.currentYear; i++) {
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = new Date().getMonth();
+    let projectId: number = 1;
+    for (let i = this.earliestProjectYear; i <= currentYear; i++) {
       for (let x = 0; x < 12; x++) {
-        this.projectMonths
+        let projectMonth: ProjectMonth = new ProjectMonth;
+        projectMonth.month = this.months[x] + '-' + i;
+        projectMonth.id = projectId;
+        projectId++;
+        this.projectMonths.push(projectMonth);
+        if (currentYear == i && currentMonth == x) {
+          projectMonth.selected = true;
+          this.projectMonthYear = projectMonth.month;
+        }
       }
     }
     this.employeeId = this.route.snapshot.paramMap.get("id") || '';
-    let currentMonth = new Date().getMonth();
-    this.projectMonths[currentMonth].selected = true;
+    
+    
 
     if (this.employeeId.length > 0) {
       this.service.getProjectsForEmployee(this.employeeId).subscribe(
@@ -114,6 +110,17 @@ export class ProjectListComponent implements OnInit {
       (res: Project[]) => {
         this.projects = res;
         this.showProjectInfo = false;
+      },
+      (err: any) => {
+        console.log('Errors: ', err);
+      }
+    );
+  }
+
+  getProjectsByMonth(): void {
+    this.service.getProjectsForMonthYear(this.projectMonthYear).subscribe(
+      (res: Project[]) => {
+        this.projects = res;
       },
       (err: any) => {
         console.log('Errors: ', err);
