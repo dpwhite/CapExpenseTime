@@ -76,6 +76,9 @@ namespace CapExpenseTime.Data.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Afe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
@@ -89,9 +92,6 @@ namespace CapExpenseTime.Data.Migrations
 
                     b.Property<double>("GapAnalysis")
                         .HasColumnType("float");
-
-                    b.Property<int>("MonthYear")
-                        .HasColumnType("int");
 
                     b.Property<double>("ProjectManagement")
                         .HasColumnType("float");
@@ -107,6 +107,9 @@ namespace CapExpenseTime.Data.Migrations
 
                     b.Property<double>("Training")
                         .HasColumnType("float");
+
+                    b.Property<int>("YearMonth")
+                        .HasColumnType("int");
 
                     b.HasKey("EmployeeId", "ProjectId");
 

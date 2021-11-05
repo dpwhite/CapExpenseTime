@@ -10,21 +10,6 @@ export class Project {
     employeeCount: number = 0;
     
   }
-   
-  export class EmployeeProjects {
-    projectId: string = '';
-    employeeId: string = '';
-    name: string = '';
-    projectType: string = '';
-    projectManagement: number = 0;
-    gapAnalysis: number = 0;
-    solutionDesign: number = 0;
-    solutionBuild: number = 0;
-    dataConversion: number = 0;
-    testing: number = 0;
-    trainig: number = 0;
-    comments: string = '';
-  }
 
   export interface IProject {
     id: string;

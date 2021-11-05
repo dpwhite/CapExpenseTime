@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapExpenseTime.Data.Migrations
 {
     [DbContext(typeof(CapExpenseTimeContext))]
-    [Migration("20211022210321_init_create")]
+    [Migration("20211104155000_init_create")]
     partial class init_create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,9 @@ namespace CapExpenseTime.Data.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Afe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
@@ -106,6 +109,9 @@ namespace CapExpenseTime.Data.Migrations
 
                     b.Property<double>("Training")
                         .HasColumnType("float");
+
+                    b.Property<int>("YearMonth")
+                        .HasColumnType("int");
 
                     b.HasKey("EmployeeId", "ProjectId");
 

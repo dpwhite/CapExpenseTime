@@ -45,6 +45,7 @@ namespace CapExpenseTime.Data.Migrations
                     ProjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    Afe = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProjectManagement = table.Column<double>(type: "float", nullable: false),
                     GapAnalysis = table.Column<double>(type: "float", nullable: false),
                     SolutionDesign = table.Column<double>(type: "float", nullable: false),
@@ -52,7 +53,8 @@ namespace CapExpenseTime.Data.Migrations
                     DataConversion = table.Column<double>(type: "float", nullable: false),
                     Testing = table.Column<double>(type: "float", nullable: false),
                     Training = table.Column<double>(type: "float", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YearMonth = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

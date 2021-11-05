@@ -20,6 +20,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,12 +34,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\employees\employee.model.ts" />
+    <None Remove="ClientApp\src\app\employees\employee.service.ts" />
+    <None Remove="ClientApp\src\app\employees\index.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CapExpenseTime.Api\CapExpenseTime.API.csproj" />
     <ProjectReference Include="..\CapExpenseTime.Data\CapExpenseTime.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\employees\" />
+    <TypeScriptCompile Include="ClientApp\src\app\employees\employee.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\employees\employee.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\employees\employee\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

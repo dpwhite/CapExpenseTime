@@ -11,6 +11,7 @@ namespace CapExpenseTime.Data
         public Guid ProjectId { get; set; }
         public Guid EmployeeId { get; set; }
         public DateTime DateAdded { get; set; }
+        public string Afe { get; set; }
         public double ProjectManagement { get; set; }
         public double GapAnalysis { get; set; }
         public double SolutionDesign { get; set; }

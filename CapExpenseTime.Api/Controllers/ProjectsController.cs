@@ -126,7 +126,7 @@ namespace CapExpenseTime.API.Controllers
 
             foreach (var project in projectViewList)
             {
-                var employeeIds = projectEmployees.Where(e => e.ProjectId == project.Id && e.YearMonth == yearMonth).Select(e => e.EmployeeId).ToList();
+                var employeeIds = projectEmployees.Where(e => e.ProjectId == project.Id && e.YearMonth >= yearMonth).Select(e => e.EmployeeId).ToList();
                 var employeeList = employeeViewList.Where(e => employeeIds.Contains(e.Id)).ToList();
                 project.Employees = employeeList;
                 project.EmployeeCount = employeeList.Count();

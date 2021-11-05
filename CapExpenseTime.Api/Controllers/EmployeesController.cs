@@ -53,15 +53,15 @@ namespace CapExpenseTime.API.Controllers
         {
         }
 
-        [HttpGet("projects/{id}")]
-        public Task<List<ProjectEmployees>> GetEmployeeProjects(string id)
+        [HttpGet("employeesbyproject/{id}")]
+        public Task<List<ProjectEmployees>> GetEmployeesByProject(string id)
         {
-            Guid employeeId;
-            if (!Guid.TryParse(id, out employeeId))
+            Guid projectId;
+            if (!Guid.TryParse(id, out projectId))
             {
                 return (Task<List<ProjectEmployees>>)Task.Run(() => new List<ProjectEmployees>());
             }
-            var employeeProjects = this._context.ProjectEmployees.Where(pe => pe.EmployeeId == employeeId).ToList();
+            var employeeProjects = this._context.ProjectEmployees.Where(pe => pe.ProjectId == projectId).ToList();
             return Task.Run(() => employeeProjects);
         }
     }
