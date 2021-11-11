@@ -8,7 +8,7 @@
   <hr>
   <div class="row">
     <div *ngFor="let project of projects" class="col-md-5">
-      <project-thumbnail [project]="project" (projectClicked)="handleProjectClicked($event)"></project-thumbnail>
+      <project-thumbnail [project]="project" [yearMonth]="projectMonthYear" (projectClicked)="handleProjectClicked($event)"></project-thumbnail>
     </div>
   </div>
 </div>

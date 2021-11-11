@@ -14,5 +14,7 @@ export const appRoutes: Routes = [
   { path: '', component: ProjectListComponent, pathMatch: 'full' },
   { path: 'counter', component: CounterComponent },
   { path: 'fetch-data', component: FetchDataComponent },
-  { path: 'employees/:id', component: EmployeesListComponent}
+  { path: 'employees/:id', component: EmployeesListComponent },
+  { path: 'employees/:id/:yearMonth', component: EmployeesListComponent }
+
 ]

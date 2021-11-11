@@ -14,9 +14,9 @@ namespace CapExpenseTime.Data.Seeding
         private const int minProjects = 3;
         private const int minEmployees = 5;
         private const int minProjectsPerEmployee = 1;
-        private const int maxProjectsPerEmployee = 5;
-        private const int maxProjects = 8;
-        private const int maxEmployees = 15;
+        private const int maxProjectsPerEmployee = 8;
+        private const int maxProjects = 15;
+        private const int maxEmployees = 20;
 
         //enum ProjectTypesEnum : int { Capital = 1, Expense = 2 };
         public static async Task Seed(CapExpenseTimeContext context)
@@ -32,17 +32,21 @@ namespace CapExpenseTime.Data.Seeding
             var employees = context.Employees.ToList();
             foreach (var employee in employees)
             {
+                var year = DateTime.Today.Year;
+                var afeValues = new List<string> { "NR", "NDF", "On Hold" };
+
                 var projectCount = Randomizer.Seed.Next(minProjectsPerEmployee, maxProjectsPerEmployee);
                 var projects = context.Projects.Take(projectCount).ToList();
                 foreach (var project in projects)
                 {
                     var monthNumber = Randomizer.Seed.Next(1, 12);
-                    var projectEmployee = new ProjectEmployees
-                    {
-                        ProjectId = project.Id,
-                        EmployeeId = employee.Id,
-                        DateAdded = project.StartDate.AddMonths(monthNumber)
-                    };
+                    var yearMonth = Convert.ToInt32($"{year}{monthNumber}");
+                    var projectEmployee = new Faker<ProjectEmployees>()
+                        .RuleFor(p => p.ProjectId, project.Id)
+                        .RuleFor(p => p.EmployeeId, employee.Id)
+                        .RuleFor(p => p.DateAdded, project.StartDate.AddMonths(monthNumber))
+                        .RuleFor(p => p.YearMonth, yearMonth)
+                        .RuleFor(p => p.Afe, f => f.PickRandom(afeValues) + ' ' + yearMonth);
                     context.ProjectEmployees.Add(projectEmployee);
                 }
             }

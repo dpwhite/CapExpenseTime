@@ -66,5 +66,23 @@ namespace CapExpenseTime.API.Controllers
             var employeeProjects = this._context.ProjectEmployeeView.Where(pe => employeeIds.Contains(pe.EmployeeId)).ToList();
             return Task.Run(() => employeeProjects);
         }
+
+        [HttpGet("employeesbyprojectandyearmonth/{id}/{monthYear}")]
+        public Task<List<ProjectEmployee>> GetEmployeesByProjectAndYearMonth(string id, string monthYear)
+        {
+            Guid projectId;
+            if (!Guid.TryParse(id, out projectId))
+            {
+                return (Task<List<ProjectEmployee>>)Task.Run(() => new List<ProjectEmployee>());
+            }
+            var month = monthYear.Split("-");
+            var monthNumber = (int)((Months)Enum.Parse(typeof(Months), month[0]));
+            var currentYearMonth = Convert.ToInt32($"{month[1]}{monthNumber}");
+            var prevYearMonth = Convert.ToInt32($"{month[1]}{monthNumber-1}");
+            var employeeIds = this._context.ProjectEmployees.Where(pe => pe.ProjectId == projectId && pe.YearMonth >= prevYearMonth && pe.YearMonth <= currentYearMonth).Select(e => e.EmployeeId).ToList();
+
+            var employeeProjects = this._context.ProjectEmployeeView.Where(pe => employeeIds.Contains(pe.EmployeeId) && pe.YearMonth >= prevYearMonth && pe.YearMonth <= currentYearMonth).ToList();
+            return Task.Run(() => employeeProjects);
+        }
     }
 }

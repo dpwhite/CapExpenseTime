@@ -12,6 +12,7 @@ exports.appRoutes = [
     { path: '', component: index_1.ProjectListComponent, pathMatch: 'full' },
     { path: 'counter', component: counter_component_1.CounterComponent },
     { path: 'fetch-data', component: fetch_data_component_1.FetchDataComponent },
-    { path: 'employees/:id', component: employees_list_component_1.EmployeesListComponent }
+    { path: 'employees/:id', component: employees_list_component_1.EmployeesListComponent },
+    { path: 'employees/:id/:yearMonth', component: employees_list_component_1.EmployeesListComponent }
 ];
 //# sourceMappingURL=routes.js.map

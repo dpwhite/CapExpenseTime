@@ -9,7 +9,7 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployeeTimeForProject(projectId: string): Observable<ProjectEmployee[]>  {
-    return this.http.get<ProjectEmployee[]>(`api/employees/employeesbyproject/${projectId}`);
+  getEmployeeTimeForProject(projectId: string, monthYear: string): Observable<ProjectEmployee[]>  {
+    return this.http.get<ProjectEmployee[]>(`api/employees/employeesbyprojectandyearmonth/${projectId}/${monthYear}`);
   }
 }

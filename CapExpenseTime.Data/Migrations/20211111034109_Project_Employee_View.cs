@@ -11,7 +11,7 @@ namespace CapExpenseTime.Data.Migrations
             dbo.ProjectEmployees.ProjectManagement, dbo.ProjectEmployees.GapAnalysis, 
             dbo.ProjectEmployees.SolutionDesign, dbo.ProjectEmployees.SolutionBuild, dbo.ProjectEmployees.DataConversion,
             dbo.ProjectEmployees.Testing, dbo.ProjectEmployees.Training, 
-            dbo.ProjectEmployees.Comments 
+            dbo.ProjectEmployees.Comments, dbo.ProjectEmployees.YearMonth 
             FROM dbo.Employees INNER JOIN dbo.ProjectEmployees ON dbo.Employees.Id = dbo.ProjectEmployees.EmployeeId";
 
             migrationBuilder.Sql(viewScript);

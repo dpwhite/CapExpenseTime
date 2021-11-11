@@ -9,6 +9,7 @@ import { IProject } from '../project.model'
 
 export class ProjectThumbnailComponent {
     @Input() project: IProject;
+    @Input() yearMonth: string;
     @Output() projectClick = new EventEmitter();
 
     handleClickMe() {

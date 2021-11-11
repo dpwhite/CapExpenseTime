@@ -35,21 +35,25 @@ export class EmployeesListComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   employeeProjects: ProjectEmployee[] = [];
   columnHeaders: string[] =
-  [
+    [
+    'name',
     'afe',
     'projectmanagement',
     'gapanalysis',
     'solutiondesign'
   ];
-  projectId: string; 
+  projectId: string;
+  yearMonth: string;
   tableData: any;
   constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService ) { }
 
   ngOnInit() {
     this.projectId = this.route.snapshot.paramMap.get("id") || '';
+    this.yearMonth = this.route.snapshot.paramMap.get("yearMonth");
+
     console.log('project id: ', this.projectId);
 
-    this.service.getEmployeeTimeForProject(this.projectId).subscribe(
+    this.service.getEmployeeTimeForProject(this.projectId, this.yearMonth).subscribe(
       (res: ProjectEmployee[]) => {
         console.log('Project Employee: ', res);
         this.employeeProjects = res;
