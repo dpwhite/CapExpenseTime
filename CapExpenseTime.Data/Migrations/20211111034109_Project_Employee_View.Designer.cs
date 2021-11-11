@@ -4,14 +4,16 @@ using CapExpenseTime.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CapExpenseTime.Data.Migrations
 {
     [DbContext(typeof(CapExpenseTimeContext))]
-    partial class CapExpenseTimeContextModelSnapshot : ModelSnapshot
+    [Migration("20211111034109_Project_Employee_View")]
+    partial class Project_Employee_View
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,44 +68,6 @@ namespace CapExpenseTime.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("CapExpenseTime.Data.ProjectEmployee", b =>
-                {
-                    b.Property<double>("Afe")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("DataConversion")
-                        .HasColumnType("float");
-
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("GapAnalysis")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("ProjectManagement")
-                        .HasColumnType("float");
-
-                    b.Property<double>("SolutionBuild")
-                        .HasColumnType("float");
-
-                    b.Property<double>("SolutionDesign")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Testing")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Training")
-                        .HasColumnType("float");
-
-                    b.ToView("ProjectEmployeeView");
                 });
 
             modelBuilder.Entity("CapExpenseTime.Data.ProjectEmployees", b =>

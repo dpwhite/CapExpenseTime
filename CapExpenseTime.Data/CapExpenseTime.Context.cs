@@ -15,6 +15,8 @@ namespace CapExpenseTime.Data
 
         public DbSet<ProjectEmployees> ProjectEmployees { get; set; }
 
+        public DbSet<ProjectEmployee> ProjectEmployeeView { get; set; }
+
         public CapExpenseTimeContext() { }
 
         public CapExpenseTimeContext(DbContextOptions options) : base(options)
@@ -39,6 +41,10 @@ namespace CapExpenseTime.Data
                 pm => pm.HasOne<Employee>().WithMany())
                 .Property(bs => bs.DateAdded)
                 .HasDefaultValueSql("getdate()");
+
+            modelBuilder.Entity<ProjectEmployee>()
+                .ToView(nameof(ProjectEmployeeView))
+                .HasKey(t => t.EmployeeId);
         }
     }
 }
