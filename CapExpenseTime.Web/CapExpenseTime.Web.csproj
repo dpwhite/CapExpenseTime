@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -36,6 +36,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\employees\employee.model.ts" />
     <None Remove="ClientApp\src\app\employees\employee.service.ts" />
+    <None Remove="ClientApp\src\app\employees\employee\employee.component.ts" />
     <None Remove="ClientApp\src\app\employees\index.ts" />
   </ItemGroup>
 
@@ -47,10 +48,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\employees\employee.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\employees\employee.service.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\employees\employee\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
