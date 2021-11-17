@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CapExpenseTime.Data
 {
-    [Table("Project_Employee_View")]
+    [Table("ProjectEmployeeView")]
     public class ProjectEmployeeView
     {
     }

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProjectEmployee, EmployeeService } from '../index';
+import { ProjectEmployee } from '../employee.model';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss']
+  styleUrls: ['./employee.component.css']
 })
 
-export class EmpoloyeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit {
 
   ngOnInit() {}
 }

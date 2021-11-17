@@ -13,4 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./employees-list/employees-list.component"), exports);
 __exportStar(require("./employee.model"), exports);
 __exportStar(require("./employee.service"), exports);
+__exportStar(require("./employee/employee.component"), exports);
 //# sourceMappingURL=index.js.map

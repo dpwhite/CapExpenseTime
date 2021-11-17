@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProjectEmployee, EmployeeService } from '../index';
-
+import { ProjectService, Project } from '../../projects/index';
+import { ProjectEmployee } from '../employee.model';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employees-list',
@@ -11,6 +12,8 @@ import { ProjectEmployee, EmployeeService } from '../index';
 export class EmployeesListComponent implements OnInit {
 
   employeeProjects: ProjectEmployee[] = [];
+  employeeProject: ProjectEmployee;
+
   columnHeaders: string[] =
     [
     'name',
@@ -22,13 +25,26 @@ export class EmployeesListComponent implements OnInit {
   projectId: string;
   yearMonth: string;
   tableData: any;
-  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService ) { }
+  clickedRows = new Set<ProjectEmployee>();
+  projectName: string;
+
+  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService, private projectService: ProjectService ) { }
 
   ngOnInit() {
     this.projectId = this.route.snapshot.paramMap.get("id") || '';
     this.yearMonth = this.route.snapshot.paramMap.get("yearMonth");
+    this.employeeProject = new ProjectEmployee();
 
     console.log('project id: ', this.projectId);
+    this.projectService.getProject(this.projectId).subscribe(
+      (res: Project) => {
+        this.projectName = res.name;
+      },
+      (err: any) => {
+        console.log('Errors: ', err);
+      }
+    );
+
 
     this.service.getEmployeeTimeForProject(this.projectId, this.yearMonth).subscribe(
       (res: ProjectEmployee[]) => {
@@ -38,7 +54,13 @@ export class EmployeesListComponent implements OnInit {
       (err: any) => {
         console.log('Errors: ', err);
       }
-    );
+    );    
+  }
+
+  selectRow(row: any) {
+    this.clickedRows.clear();
+    this.clickedRows.add(row);
+    this.employeeProject = row; 
   }
 
 }

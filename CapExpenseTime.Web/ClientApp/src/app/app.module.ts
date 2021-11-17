@@ -12,11 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectDetailComponent, ProjectListComponent, ProjectListResolver, ProjectThumbnailComponent, ProjectService } from './projects/index';
 import { appRoutes } from './routes';
 import { AppMaterialModule } from './appmaterial.module';
-import { EmployeesListComponent } from './employees/employees-list/employees-list.component';
+import { EmployeesListComponent, EmployeeComponent } from './employees/index';
 
 @NgModule({
-  exports: [
-  ],
+  exports: [],
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -26,7 +25,8 @@ import { EmployeesListComponent } from './employees/employees-list/employees-lis
     ProjectListComponent,
     ProjectDetailComponent,
     ProjectThumbnailComponent,
-    EmployeesListComponent
+    EmployeesListComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
