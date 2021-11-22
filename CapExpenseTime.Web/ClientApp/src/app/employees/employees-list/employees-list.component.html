@@ -7,7 +7,7 @@
     </mat-form-field>
   </mat-card>
 </section>
-
+<br/>
 <section>
   <table mat-table [dataSource]="employeeProjects" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="name">
@@ -44,18 +44,55 @@
         *matRowDef="let row; columns: columnHeaders;"></tr>
   </table>
 </section>
-
-  <section>
-    <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput type="text" readonly [(ngModel)]="employeeProject.name" />
-    </mat-form-field>
-    <mat-form-field appearence="fill">
-      <mat-label>AFE</mat-label>
-      <input matInput type="text" readonly [(ngModel)]="employeeProject.afe" />
-    </mat-form-field>
-    <mat-form-field appearence="fill">
-      <mat-label>Project Management</mat-label>
-      <input matInput type="number" [(ngModel)]="employeeProject.projectManagement" />
-    </mat-form-field>
+<br/>
+  <section *ngIf="rowSelected">
+      <mat-card>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" readonly formControlName="name" />
+          </mat-form-field>
+          <mat-form-field appearence="fill">
+            <mat-label>AFE</mat-label>
+            <input matInput type="text" readonly [(ngModel)]="employeeProject.afe" />
+          </mat-form-field>
+          <mat-form-field appearence="fill">
+            <mat-label>Project Management</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.projectManagement"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>GAP Analysis</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.gapAnalysis"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Solution Design</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.solutionDesign"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Data Converstion</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.dataConversion"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Testing</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.testing"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Training</mat-label>
+            <input matInput type="number" [(ngModel)]="employeeProject.training"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Comments</mat-label>
+            <textarea matInput [(ngModel)]="employeeProject.comments"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-flat-button color="primary">Save Changes</button>
+          <button mat-flat-button>Cancel</button>
+        </div>
+      </mat-card>
   </section>
+
