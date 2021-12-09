@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, ProjectService, ProjectMonth } from '../index';
+import { Project, ProjectMonth } from '../project.model';
+import { ProjectService } from '../project.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 

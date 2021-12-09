@@ -80,8 +80,24 @@ namespace CapExpenseTime.API.Controllers
             var currentYearMonth = Convert.ToInt32($"{month[1]}{monthNumber}");
             var prevYearMonth = Convert.ToInt32($"{month[1]}{monthNumber-1}");
             var employeeIds = this._context.ProjectEmployees.Where(pe => pe.ProjectId == projectId && pe.YearMonth >= prevYearMonth && pe.YearMonth <= currentYearMonth).Select(e => e.EmployeeId).ToList();
-
-            var employeeProjects = this._context.ProjectEmployeeView.Where(pe => employeeIds.Contains(pe.EmployeeId) && pe.YearMonth >= prevYearMonth && pe.YearMonth <= currentYearMonth).ToList();
+            var employeeProjects = this._context.ProjectEmployeeView.Where(pe => employeeIds.Contains(pe.EmployeeId) && pe.YearMonth >= prevYearMonth && pe.YearMonth == currentYearMonth).ToList();
+            if (employeeIds.Any() && employeeProjects.Any() && (employeeIds.Count() != employeeProjects.Count()))
+            {
+                var foundEmployeeIdList = employeeProjects.Select(e => e.EmployeeId).ToList();
+                //there are employees who entered in time last month that don't have time this month
+                foreach (var employeeId in employeeIds.Except(foundEmployeeIdList))
+                {
+                    var employee = this._context.Employees.Single(e => e.Id == employeeId);
+                    var projectEmployee = new ProjectEmployee
+                    {
+                        EmployeeId = employeeId,
+                        YearMonth = currentYearMonth,
+                        Name = $"{employee.FirstName} {employee.LastName}",
+                        Afe = employeeProjects.First().Afe,
+                    };
+                    employeeProjects.Add(projectEmployee);
+                }
+            }
             return Task.Run(() => employeeProjects);
         }
     }

@@ -1,28 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProjectEmployee, EmployeeService } from '../index';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface PeriodicElement {
-  first: string;
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, first: 'durward', name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, first: 'durward', name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, first: 'durward', name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, first: 'durward', name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, first: 'durward', name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, first: 'durward', name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, first: 'durward', name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, first: 'durward', name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, first: 'durward', name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, first: 'durward', name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import { ProjectService, Project } from '../../projects/index';
+import { ProjectEmployee } from '../employee.model';
+import { EmployeeService } from '../employee.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-employees-list',
@@ -31,9 +12,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class EmployeesListComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
   employeeProjects: ProjectEmployee[] = [];
+  employeeProject: ProjectEmployee;
+
   columnHeaders: string[] =
     [
       'name',
@@ -50,13 +31,41 @@ export class EmployeesListComponent implements OnInit {
   projectId: string;
   yearMonth: string;
   tableData: any;
-  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService, public dialog: MatDialog ) { }
+  clickedRows = new Set<ProjectEmployee>();
+  projectName: string;
+  rowSelected: boolean = false;
+  myForm: FormGroup;
+
+  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService, private projectService: ProjectService, private fb: FormBuilder ) { }
 
   ngOnInit() {
     this.projectId = this.route.snapshot.paramMap.get("id") || '';
     this.yearMonth = this.route.snapshot.paramMap.get("yearMonth");
+    this.employeeProject = new ProjectEmployee();
+
+    this.myForm = this.fb.group(
+      {
+        name: [''],
+        afe: [''],
+        projectManagement: [''],
+        gapAnalysis: [''],
+        solutionDesign: [''],
+        dataConversion: [''],
+        testing: [''],
+        training: ['']
+      }
+    );
 
     console.log('project id: ', this.projectId);
+    this.projectService.getProject(this.projectId).subscribe(
+      (res: Project) => {
+        this.projectName = res.name;
+      },
+      (err: any) => {
+        console.log('Errors: ', err);
+      }
+    );
+
 
     this.service.getEmployeeTimeForProject(this.projectId, this.yearMonth).subscribe(
       (res: ProjectEmployee[]) => {
@@ -66,7 +75,25 @@ export class EmployeesListComponent implements OnInit {
       (err: any) => {
         console.log('Errors: ', err);
       }
-    );
+    );    
+  }
+
+  selectRow(row: any) {
+    this.clickedRows.clear();
+    if (this.myForm.controls.name.value != row.name) {
+      this.myForm.controls.name.setValue(row.name);
+      this.clickedRows.add(row);
+      this.employeeProject = row;
+      this.rowSelected = true;
+    }
+    else {
+      this.rowSelected = false;
+     
+    }
+  }
+
+  onSubmit(): void {
+    console.log('submit button clicked');
   }
 
 }
