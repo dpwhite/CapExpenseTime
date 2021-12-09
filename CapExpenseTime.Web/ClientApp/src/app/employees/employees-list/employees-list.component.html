@@ -11,7 +11,7 @@
   <table mat-table [dataSource]="employeeProjects">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="employeeTime(element)">{{element.name}}</button> </td>
     </ng-container>
 
     <ng-container matColumnDef="afe">
@@ -21,23 +21,53 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="projectmanagement">
-      <th mat-header-cell *matHeaderCellDef> Project Management </th>
+      <th mat-header-cell *matHeaderCellDef> Project<br />Management </th>
       <td mat-cell *matCellDef="let element"> {{element.projectManagement}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="gapanalysis">
-      <th mat-header-cell *matHeaderCellDef> Gap Analysis </th>
+      <th mat-header-cell *matHeaderCellDef> Gap<br />Analysis </th>
       <td mat-cell *matCellDef="let element"> {{element.gapAnalysis}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="solutiondesign">
-      <th mat-header-cell *matHeaderCellDef> Solution Design </th>
+      <th mat-header-cell *matHeaderCellDef> Solution<br />Design </th>
       <td mat-cell *matCellDef="let element"> {{element.solutionDesign}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="solutionbuild">
+      <th mat-header-cell *matHeaderCellDef> Solution<br />Build </th>
+      <td mat-cell *matCellDef="let element"> {{element.solutionBuild}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dataconversion">
+      <th mat-header-cell *matHeaderCellDef> Data<br />Conversion </th>
+      <td mat-cell *matCellDef="let element"> {{element.dataConversion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="testing">
+      <th mat-header-cell *matHeaderCellDef> Testing </th>
+      <td mat-cell *matCellDef="let element"> {{element.testing}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="training">
+      <th mat-header-cell *matHeaderCellDef> Training </th>
+      <td mat-cell *matCellDef="let element"> {{element.training}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <th mat-header-cell *matHeaderCellDef> Comments </th>
+      <td mat-cell *matCellDef="let element"> {{element.comments}} </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="columnHeaders"></tr>
     <tr mat-row *matRowDef="let row; columns: columnHeaders;"></tr>
   </table>
 </section>
+
+<h1 mat-dialog-title>Month End Cap Time</h1>
+<div mat-dialog-content>
+  Cap/Expense Time for Month:
+  
+</div>

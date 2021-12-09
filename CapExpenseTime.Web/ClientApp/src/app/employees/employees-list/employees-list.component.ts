@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProjectEmployee, EmployeeService } from '../index';
-
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   first: string;
@@ -36,16 +36,21 @@ export class EmployeesListComponent implements OnInit {
   employeeProjects: ProjectEmployee[] = [];
   columnHeaders: string[] =
     [
-    'name',
-    'afe',
-    'projectmanagement',
-    'gapanalysis',
-    'solutiondesign'
+      'name',
+      'afe',
+      'projectmanagement',
+      'gapanalysis',
+      'solutiondesign',
+      'solutionbuild',
+      'dataconversion',
+      'testing',
+      'training',
+      'comments'
   ];
   projectId: string;
   yearMonth: string;
   tableData: any;
-  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService ) { }
+  constructor(private router: Router, private route: ActivatedRoute, private service: EmployeeService, public dialog: MatDialog ) { }
 
   ngOnInit() {
     this.projectId = this.route.snapshot.paramMap.get("id") || '';
